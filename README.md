@@ -61,39 +61,6 @@ PDF processing	PyMuPDF
 LLM	Google Gemini API (OpenAI supported through configuration)
 Testing	pytest, FastAPI dependency overrides, httpx.MockTransport
 
-**Project structure**
-viaclaims/
-├── ai_engine/
-│   ├── claimvision_ai/        # importable AI engine package
-│   │   ├── chunker.py         # overlapping text chunks
-│   │   ├── embeddings.py      # Sentence Transformers wrapper
-│   │   ├── llm.py             # Gemini / OpenAI clients behind one interface
-│   │   ├── pdf_processor.py   # PyMuPDF text extraction
-│   │   ├── rag.py             # prompt building and citation validation
-│   │   ├── testing.py         # fake embedder and fake LLM for tests
-│   │   └── vector_store.py    # ChromaDB wrapper
-│   ├── tests/
-│   └── pyproject.toml
-├── backend/
-│   ├── app/
-│   │   ├── api/routes/        # customers, policies, claims, documents, search, ask
-│   │   ├── models/            # SQLAlchemy tables
-│   │   ├── schemas/           # Pydantic request/response models
-│   │   ├── config.py
-│   │   ├── database.py
-│   │   ├── dependencies.py
-│   │   └── main.py
-│   └── tests/
-├── frontend/
-│   ├── views/                 # claims, new claim, claim detail pages
-│   ├── tests/
-│   ├── api_client.py          # the only code that makes HTTP calls
-│   ├── common.py
-│   └── app.py
-├── scripts/                   # synthetic data and LLM connection checks
-└── sample_data/               # generated synthetic PDFs
-
-
 
 **Design decisions**
 Human in the loop. There is no "fraud" status anywhere. The model is instructed not to conclude fraud or recommend approval or rejection, and every answer carries a disclaimer.
